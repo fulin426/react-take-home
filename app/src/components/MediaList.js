@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     width: 100,
     height: 180,
     borderRadius: 6,
+    cursor: 'pointer',
   },
   iconWrapper: {
     border: '1px solid #E0EEF2',
@@ -57,6 +58,7 @@ function MediaList({ medias }) {
       {medias.map(media =>
         <div key={media.cover_photo_url} className={classes.thumbnailContainer}>
           <img className={classes.thumbnail} src={media.cover_photo_url} />
+          {/* Render arrow if video */}
           {media.media_type === 'video' && <PlayArrowIcon className={classes.playIcon} fontSize="large"/>}
           <Box display='flex' className={classes.iconWrapper} borderRadius={6}>
             <Box 
@@ -74,7 +76,7 @@ function MediaList({ medias }) {
               justifyContent='center' 
               className={classes.iconHolder}
             >
-            <a href={media.download_url} download>
+            <a href={media.download_url} target="_blank" download>
               <GetAppIcon className={classes.icon} />
             </a>
             </Box>
