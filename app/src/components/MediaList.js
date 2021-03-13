@@ -8,6 +8,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 const useStyles = makeStyles(theme => ({
   wrapper: {
     overflowX: 'scroll',
+    backgroundColor: '#F7FBFC',
   },
   thumbnailContainer: {
     position: 'relative',
@@ -15,13 +16,18 @@ const useStyles = makeStyles(theme => ({
     '&:last-child': {
       marginRight: 0,
     },
+    borderRadius: 6,
   },
   thumbnail: {
     width: 100,
     height: 180,
     borderRadius: 6,
   },
-  iconContainer: {
+  iconWrapper: {
+    border: '1px solid #E0EEF2',
+    marginTop: 4,
+  },
+  iconHolder: {
     height: 48,
     width: 48,
     cursor: 'pointer',
@@ -41,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 
 function MediaList({ medias }) {
   const classes = useStyles();
-  console.log(medias);
 
   const copyLink = (link) => {
     navigator.clipboard.writeText(link);
@@ -53,12 +58,13 @@ function MediaList({ medias }) {
         <div key={media.cover_photo_url} className={classes.thumbnailContainer}>
           <img className={classes.thumbnail} src={media.cover_photo_url} />
           {media.media_type === 'video' && <PlayArrowIcon className={classes.playIcon} fontSize="large"/>}
-          <Box display='flex'>
+          <Box display='flex' className={classes.iconWrapper} borderRadius={6}>
             <Box 
               display='flex' 
               alignItems='center' 
               justifyContent='center' 
-              className={classes.iconContainer}
+              className={classes.iconHolder}
+              style={{borderRight: '1px solid #E0EEF2'}}
             >
               <LinkIcon onClick={() => copyLink(media.tracking_link)} className={classes.icon}/>
             </Box>
@@ -66,7 +72,7 @@ function MediaList({ medias }) {
               display='flex' 
               alignItems='center' 
               justifyContent='center' 
-              className={classes.iconContainer}
+              className={classes.iconHolder}
             >
             <a href={media.download_url} download>
               <GetAppIcon className={classes.icon} />
